@@ -16,10 +16,11 @@ public class VClassTest {
         assertEquals("package com.meti;\ncontent", vClass.print());
     }
 
-  /*  @Test
+    @Test
     void getSimpleName(){
-        VClass vClass = new VClass(new VPackage("com", "meti"), "content");
-    }*/
+        VClass vClass = new VClass(new VPackage("com", "meti"), "Main", "content");
+        assertEquals("com.meti.Main", vClass.getSimpleName());
+    }
 
     @Test
     void constructWithContent() {
