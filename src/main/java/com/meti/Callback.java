@@ -6,7 +6,7 @@ package com.meti;
  * @since 1/13/2019
  */
 public class Callback {
-    private Exception exception;
+    Exception exception;
 
     public Callback() {
     }
