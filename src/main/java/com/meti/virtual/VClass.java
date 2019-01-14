@@ -1,7 +1,5 @@
 package com.meti.virtual;
 
-import com.meti.VPackage;
-
 import java.util.Set;
 
 /**

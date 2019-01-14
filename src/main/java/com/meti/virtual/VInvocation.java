@@ -1,8 +1,6 @@
 package com.meti.virtual;
 
 import com.meti.Clause;
-import com.meti.Virtual;
-import com.meti.util.StringUtil;
 
 import static com.meti.util.StringUtil.*;
 
