@@ -6,14 +6,16 @@ package com.meti.virtual;
  * @since 1/14/2019
  */
 public class VClass implements Virtual {
+    final String name;
     final String content;
     final VPackage vPackage;
 
-    public VClass(String content) {
-        this(VPackage.DEFAULT, content);
+    public VClass(String name, String content) {
+        this(VPackage.DEFAULT, name, content);
     }
 
-    public VClass(VPackage vPackage, String content) {
+    public VClass(VPackage vPackage, String name, String content) {
+        this.name = name;
         this.vPackage = vPackage;
         this.content = content;
     }
