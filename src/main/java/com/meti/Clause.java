@@ -11,13 +11,13 @@ public abstract class Clause<P> implements Consumer<P[]> {
     public final Callback callback = new Callback();
 
     @Override
-    public void accept(P[] p) {
+    public void accept(P[] parameters) {
         try {
-            acceptThrows(p);
+            acceptThrows(parameters);
         } catch (Exception e) {
             callback.setException(e);
         }
     }
 
-    public abstract void acceptThrows(P[] p) throws Exception;
+    protected abstract void acceptThrows(P[] parameters) throws Exception;
 }

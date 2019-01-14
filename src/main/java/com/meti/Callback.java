@@ -29,4 +29,8 @@ public class Callback {
             throw new IllegalArgumentException("Exception has already been set!");
         }
     }
+
+    public boolean hasException() {
+        return exception != null;
+    }
 }

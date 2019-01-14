@@ -18,8 +18,8 @@ public class Example {
         VState state = new VState();
         state.add(new VInvocation<String>("print", new Clause<>() {
             @Override
-            public void acceptThrows(String[] p) {
-                System.out.println(String.join(" ", p));
+            public void acceptThrows(String[] parameters) {
+                System.out.println(String.join(" ", parameters));
             }
         }));
 
