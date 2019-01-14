@@ -1,7 +1,8 @@
 package com.meti;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author SirMathhman
@@ -12,11 +13,13 @@ public class VClassTest {
     @Test
     void constructWithContent() {
         VClass vClass = new VClass("content");
-        Assertions.assertEquals("content", vClass.content);
+        assertEquals("content", vClass.content);
     }
 
- /*   @Test
+    @Test
     void constructWithContentAndPackage(){
-        VClass vClass = new VClass(new VPackage("com", "meti"), content");
-    }*/
+        VClass vClass = new VClass(new VPackage("com", "meti"), "content");
+        assertEquals(new VPackage("com", "meti"), vClass.vPackage);
+        assertEquals("content", vClass.content);
+    }
 }

@@ -7,8 +7,14 @@ package com.meti;
  */
 public class VClass {
     final String content;
+    final VPackage vPackage;
 
     public VClass(String content) {
+        this(VPackage.DEFAULT, content);
+    }
+
+    public VClass(VPackage vPackage, String content) {
+        this.vPackage = vPackage;
         this.content = content;
     }
 }
