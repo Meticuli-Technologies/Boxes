@@ -34,6 +34,6 @@ public class VClass implements Virtual {
     }
 
     public String getSimpleName() {
-        return String.join(".", vPackage.args) + "." + name;
+        return vPackage.joinedArguments() + "." + name;
     }
 }

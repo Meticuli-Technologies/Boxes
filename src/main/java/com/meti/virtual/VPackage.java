@@ -25,6 +25,10 @@ public class VPackage implements Virtual {
 
     @Override
     public String print() {
-        return "package " + String.join(".", args) + ";";
+        return "package " + joinedArguments() + ";";
+    }
+
+    public String joinedArguments() {
+        return String.join(".", args);
     }
 }
