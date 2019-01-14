@@ -11,6 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class VClassTest {
     @Test
+    void print() {
+        VClass vClass = new VClass(new VPackage("com", "meti"), "content");
+        assertEquals("package com.meti;\ncontent", vClass.print());
+    }
+
+    @Test
     void constructWithContent() {
         VClass vClass = new VClass("content");
         assertEquals("content", vClass.content);

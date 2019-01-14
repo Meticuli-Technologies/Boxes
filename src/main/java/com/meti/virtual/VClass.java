@@ -5,7 +5,7 @@ package com.meti.virtual;
  * @version 0.0.0
  * @since 1/14/2019
  */
-public class VClass {
+public class VClass implements Virtual {
     final String content;
     final VPackage vPackage;
 
@@ -16,5 +16,18 @@ public class VClass {
     public VClass(VPackage vPackage, String content) {
         this.vPackage = vPackage;
         this.content = content;
+    }
+
+    @Override
+    public String print() {
+        /*
+        to get the class as a compilable, writable, version,
+        we simply have to write the class as normal
+         */
+
+        return String.join("\n",
+                vPackage.print(),
+                content
+        );
     }
 }
