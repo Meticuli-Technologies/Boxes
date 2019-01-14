@@ -9,11 +9,12 @@ public class VStringClass extends VClass {
     final String content;
 
     public VStringClass(String name, String content) {
-        this(VPackage.DEFAULT, name, content);
+        super(name);
+        this.content = content;
     }
 
     public VStringClass(VPackage vPackage, String name, String content) {
-        super(name, vPackage);
+        super(vPackage, name);
         this.content = content;
     }
 
