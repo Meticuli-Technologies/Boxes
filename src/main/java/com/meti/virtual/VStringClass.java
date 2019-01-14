@@ -5,7 +5,7 @@ package com.meti.virtual;
  * @version 0.0.0
  * @since 1/14/2019
  */
-public class VStringClass extends VClass implements Virtual {
+public class VStringClass extends VClass {
     final String content;
 
     public VStringClass(String name, String content) {
@@ -18,15 +18,7 @@ public class VStringClass extends VClass implements Virtual {
     }
 
     @Override
-    public String print() {
-        /*
-        to get the class as a compilable, writable, version,
-        we simply have to write the class as normal
-         */
-
-        return String.join("\n",
-                vPackage.print(),
-                content
-        );
+    public String printContent() {
+        return content;
     }
 }

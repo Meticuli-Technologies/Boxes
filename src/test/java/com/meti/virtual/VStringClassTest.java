@@ -11,6 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class VStringClassTest {
     @Test
+    void printContent() {
+        VClass vClass = new VStringClass("Main", "content");
+        assertEquals("content", vClass.printContent());
+    }
+
+    @Test
     void print() {
         VClass vClass = new VStringClass(new VPackage("com", "meti"), "Main", "content");
         assertEquals("package com.meti;\ncontent", vClass.print());
