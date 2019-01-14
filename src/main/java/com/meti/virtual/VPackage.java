@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @version 0.0.0
  * @since 1/14/2019
  */
-public class VPackage {
+public class VPackage implements Virtual {
     public static final VPackage DEFAULT = new VPackage();
     public final String[] args;
 
@@ -21,5 +21,10 @@ public class VPackage {
         if (o == null || getClass() != o.getClass()) return false;
         VPackage vPackage = (VPackage) o;
         return Arrays.equals(args, vPackage.args);
+    }
+
+    @Override
+    public String print() {
+        return "package " + String.join(".", args) + ";";
     }
 }

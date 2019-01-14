@@ -12,6 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class VPackageTest {
     @Test
+    void print() {
+        VPackage vPackage = new VPackage("com", "meti");
+        assertEquals("package com.meti;", vPackage.print());
+    }
+
+    @Test
     void constructDefault(){
         assertArrayEquals(new String[0], VPackage.DEFAULT.args);
     }
