@@ -6,6 +6,14 @@ public class VClassWrapper {
     public final String wrappedName;
     public final String simpleName;
 
+    public static VClassWrapper of(Class<?> clazz){
+        return new VClassWrapper(clazz);
+    }
+
+    public static VClassWrapper of(VClass vClass){
+        return new VClassWrapper(vClass);
+    }
+
     public VClassWrapper(Class<?> clazz){
         this.wrappedName = clazz.getName();
         this.simpleName = clazz.getSimpleName();

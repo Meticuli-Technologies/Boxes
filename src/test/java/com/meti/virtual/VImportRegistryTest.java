@@ -12,8 +12,8 @@ class VImportRegistryTest {
         registry.register(new VClassWrapper(String.class));
         registry.register(new VClassWrapper(new VStringClass(new VPackage("com", "meti"), "Main", "")));
 
-        String expected = "import java.lang.String;\n" +
-                "import com.meti.Main;\n";
+        String expected = "import com.meti.Main;\n" +
+                "import java.lang.String;\n";
         assertEquals(expected, registry.print());
     }
 }
