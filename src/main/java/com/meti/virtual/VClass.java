@@ -34,7 +34,7 @@ public abstract class VClass implements Virtual {
 
     public abstract String printContent();
 
-    public String getSimpleName() {
+    public String getName() {
         return vPackage.joinedArguments() + "." + name;
     }
 }

@@ -13,6 +13,6 @@ class VClassTest {
     @Test
     void getSimpleName(){
         VClass vClass = new VStringClass(new VPackage("com", "meti"), "Main", "content");
-        assertEquals("com.meti.Main", vClass.getSimpleName());
+        assertEquals("com.meti.Main", vClass.getName());
     }
 }
