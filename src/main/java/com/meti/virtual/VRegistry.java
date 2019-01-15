@@ -5,7 +5,9 @@ import com.meti.util.CollectionUtil;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author SirMathhman
@@ -18,6 +20,10 @@ public class VRegistry<T> {
     @SafeVarargs
     public VRegistry(T... content) {
         Arrays.stream(content).distinct().forEach(this::register);
+    }
+
+    public Stream<T> contentStream(){
+        return elements.stream().map(element -> element.content);
     }
 
     public VElement<T> elementOf(T content) {

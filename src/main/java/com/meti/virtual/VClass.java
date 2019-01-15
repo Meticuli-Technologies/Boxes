@@ -6,6 +6,7 @@ package com.meti.virtual;
  * @since 1/14/2019
  */
 public abstract class VClass implements Virtual {
+    final VClassState classState = new VClassState();
     final VPackage vPackage;
     final String name;
 

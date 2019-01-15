@@ -2,10 +2,7 @@ package com.meti.virtual;
 
 import com.meti.util.CollectionUtil;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -87,5 +84,15 @@ public class VRegistryTest {
         VRegistry<String> registry = new VRegistry<>("test");
 
         assertThrows(IllegalArgumentException.class, () -> registry.register("test"));
+    }
+
+    @Test
+    void contentStream() {
+        VRegistry<String> registry = new VRegistry<>("test0", "test1");
+        Set<String> collect = registry.contentStream().collect(Collectors.toSet());
+
+        assertEquals(2, collect.size());
+        assertTrue(collect.contains("test0"));
+        assertTrue(collect.contains("test1"));
     }
 }
