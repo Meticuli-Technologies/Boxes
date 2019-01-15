@@ -13,11 +13,11 @@ public abstract class VClass implements Virtual {
     final VPackage vPackage;
     final String name;
 
-    public VClass(String name) {
+    VClass(String name) {
         this(VPackage.DEFAULT, name);
     }
 
-    public VClass(VPackage vPackage, String name) {
+    VClass(VPackage vPackage, String name) {
         this.name = name;
         this.vPackage = vPackage;
     }

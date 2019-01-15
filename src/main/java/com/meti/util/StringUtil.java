@@ -12,7 +12,7 @@ public class StringUtil {
         return encapsulate("(", content, ")");
     }
 
-    public static String encapsulate(String front, String content, String back){
+    private static String encapsulate(String front, String content, String back){
         return front + content + back;
     }
 }

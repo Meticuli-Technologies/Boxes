@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 0.0.0
  * @since 1/14/2019
  */
-public class VRegistryTest {
+class VRegistryTest {
     @Test
     void constructWithElements() {
         VGenericRegistry<String> registry = new VGenericRegistry<>("test0", "test1");

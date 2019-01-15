@@ -15,11 +15,11 @@ import java.util.stream.Stream;
  * @since 1/14/2019
  */
 public class VRegistry<T, E extends VElement<T>> {
-    final Function<T, E> allocationFunction;
+    private final Function<T, E> allocationFunction;
     final Set<E> elements = new HashSet<>();
 
     @SafeVarargs
-    public VRegistry(Function<T, E> allocationFunction, T... content) {
+    protected VRegistry(Function<T, E> allocationFunction, T... content) {
         this.allocationFunction = allocationFunction;
         Arrays.stream(content).distinct().forEach(this::register);
     }
@@ -42,14 +42,13 @@ public class VRegistry<T, E extends VElement<T>> {
         }
     }
 
-    public E register(T content) {
+    public void register(T content) {
         if (contains(content)) {
             throw new IllegalArgumentException(content + " has already been registered!");
         }
 
         E element = allocationFunction.apply(content);
         elements.add(element);
-        return element;
     }
 
     private boolean contains(T content) {

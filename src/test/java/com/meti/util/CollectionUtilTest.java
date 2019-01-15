@@ -1,7 +1,6 @@
 package com.meti.util;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.util.Arrays;
 import java.util.Collections;

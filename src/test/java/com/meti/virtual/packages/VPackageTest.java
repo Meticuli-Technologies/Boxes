@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @version 0.0.0
  * @since 1/14/2019
  */
-public class VPackageTest {
+class VPackageTest {
     @Test
     void joinedArguments() {
         VPackage vPackage = new VPackage("com", "meti");

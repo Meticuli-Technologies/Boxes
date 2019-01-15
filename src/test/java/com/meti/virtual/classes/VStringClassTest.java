@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @version 0.0.0
  * @since 1/14/2019
  */
-public class VStringClassTest {
+class VStringClassTest {
     @Test
     void printContent() {
         VClass vClass = new VStringClass("Main", "content");
