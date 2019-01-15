@@ -1,15 +1,13 @@
 package com.meti.virtual;
 
-import java.util.function.Function;
-
-public class VFieldRegistry extends VRegistry<VField> implements Virtual {
+public class VFieldRegistry extends VGenericRegistry<VField> implements Virtual {
     @Override
     public String print() {
-        contentStream().map(new Function<VField, String>() {
-            @Override
-            public String apply(VField vField) {
-                return vField.toString();
-            }
-        });
+        StringBuilder builder = new StringBuilder();
+        contentStream().map(VField::print)
+                .forEach(s -> builder.append(s)
+                        .append("\n"));
+
+        return builder.toString();
     }
 }

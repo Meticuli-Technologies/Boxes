@@ -11,6 +11,6 @@ public class VField implements Virtual {
 
     @Override
     public String print() {
-        return type.content.print
+        return type.content.simpleName + " " + name + ";";
     }
 }

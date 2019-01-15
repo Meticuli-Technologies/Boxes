@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VRegistryTest {
     @Test
     void constructWithElements() {
-        VRegistry<String> registry = new VRegistry<>("test0", "test1");
+        VGenericRegistry<String> registry = new VGenericRegistry<>("test0", "test1");
         Set<VElement<String>> elements = registry.elements;
 
         assertEquals(2, elements.size());
@@ -40,19 +40,19 @@ public class VRegistryTest {
 
     @Test
     void constructWithoutElements() {
-        VRegistry<String> registry = new VRegistry<>();
+        VGenericRegistry<String> registry = new VGenericRegistry<>();
         assertEquals(0, registry.elements.size());
     }
 
     @Test
     void elementOfNotPresent() {
-        VRegistry<String> registry = new VRegistry<>();
+        VGenericRegistry<String> registry = new VGenericRegistry<>();
         assertThrows(IllegalArgumentException.class, () -> registry.elementOf("test"));
     }
 
     @Test
     void elementOfPresent() {
-        VRegistry<String> registry = new VRegistry<>("test");
+        VGenericRegistry<String> registry = new VGenericRegistry<>("test");
         VElement<String> element = registry.elementOf("test");
 
         assertEquals("test", element.content);
@@ -60,7 +60,7 @@ public class VRegistryTest {
 
     @Test
     void elementMultiplePresent() {
-        VRegistry<String> registry = new VRegistry<>();
+        VGenericRegistry<String> registry = new VGenericRegistry<>();
         registry.elements.add(new VElement<>("test"));
         registry.elements.add(new VElement<>("test"));
 
@@ -69,7 +69,7 @@ public class VRegistryTest {
 
     @Test
     void registerNotPresent() {
-        VRegistry<String> registry = new VRegistry<>();
+        VGenericRegistry<String> registry = new VGenericRegistry<>();
         registry.register("test");
 
         Set<VElement<String>> elements = registry.elements;
@@ -81,14 +81,14 @@ public class VRegistryTest {
 
     @Test
     void registerPresent() {
-        VRegistry<String> registry = new VRegistry<>("test");
+        VGenericRegistry<String> registry = new VGenericRegistry<>("test");
 
         assertThrows(IllegalArgumentException.class, () -> registry.register("test"));
     }
 
     @Test
     void contentStream() {
-        VRegistry<String> registry = new VRegistry<>("test0", "test1");
+        VGenericRegistry<String> registry = new VGenericRegistry<>("test0", "test1");
         Set<String> collect = registry.contentStream().collect(Collectors.toSet());
 
         assertEquals(2, collect.size());
