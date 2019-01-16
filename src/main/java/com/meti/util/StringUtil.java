@@ -8,6 +8,10 @@ package com.meti.util;
 public class StringUtil {
     private StringUtil(){}
 
+    public static String curly(String content){
+        return "{" + content + "}";
+    }
+
     public static String parentheses(String content) {
         return encapsulate("(", content, ")");
     }

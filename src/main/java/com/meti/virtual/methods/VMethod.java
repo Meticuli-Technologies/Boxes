@@ -16,6 +16,8 @@ public class VMethod implements Virtual {
     private final VImport returnType;
     private final VParameter[] parameters;
 
+    public VMethodContent content = new VStringContent("return null");
+
     public VMethod(String name, VImport returnType, VParameter... parameters) {
         this.name = name;
         this.returnType = returnType;
@@ -36,7 +38,7 @@ public class VMethod implements Virtual {
         return returnString +
                 " " +
                 name +
-                StringUtil.parentheses(String.join(",", parameterStrings))
-                + "{}";
+                StringUtil.parentheses(String.join(",", parameterStrings)) +
+                StringUtil.curly(content.getContent(returnType, parameters));
     }
 }
