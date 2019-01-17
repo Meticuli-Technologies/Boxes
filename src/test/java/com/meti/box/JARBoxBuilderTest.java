@@ -2,7 +2,6 @@ package com.meti.box;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -12,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class JARBoxBuilderTest {
     private static Path jarPath;
+    private static Path emptyPath = Paths.get(".\\Empty.jar");
 
     @BeforeAll
     static void checkStatus(){
@@ -55,18 +56,60 @@ class JARBoxBuilderTest {
     }
 
     @Test
-    void checkJar() {
+    void checkJarSuccessfully() {
         JARBoxBuilder boxBuilder = new JARBoxBuilder();
 
         assertDoesNotThrow(() -> boxBuilder.checkJar(jarPath));
     }
 
     @Test
-    void createZip() throws IOException {
+    void checkJarDoesNotExist() {
+        JARBoxBuilder boxBuilder = new JARBoxBuilder();
+
+        assertThrows(IllegalArgumentException.class, () -> boxBuilder.checkJar(Paths.get(".\\foo")));
+    }
+
+    @Test
+    void checkJarDirectory() throws IOException {
+        JARBoxBuilder boxBuilder = new JARBoxBuilder();
+
+        Path testPath = Paths.get(".\\test");
+        assertFalse(Files.exists(testPath));
+
+        Files.createDirectory(testPath);
+        assertThrows(IllegalArgumentException.class, () -> boxBuilder.checkJar(testPath));
+        Files.delete(testPath);
+    }
+
+    @Test
+    void checkJarNonJar() throws IOException {
+        JARBoxBuilder boxBuilder = new JARBoxBuilder();
+
+        Path testPath = Paths.get(".\\foo.bar");
+        assertFalse(Files.exists(testPath));
+
+        Files.createFile(testPath);
+        assertThrows(IllegalArgumentException.class, () -> boxBuilder.checkJar(testPath));
+        Files.delete(testPath);
+    }
+
+    @Test
+    void createZipNonEmpty() throws IOException {
         JARBoxBuilder boxBuilder = new JARBoxBuilder();
 
         ZipFile zip = boxBuilder.createZip(jarPath);
         assertEquals(jarPath.toAbsolutePath().toString(), zip.getName());
+    }
+
+    @Test
+    void createZipEmpty() throws IOException {
+        JARBoxBuilder boxBuilder = new JARBoxBuilder();
+
+        ZipOutputStream outputStream = new ZipOutputStream(Files.newOutputStream(emptyPath));
+        outputStream.flush();
+        outputStream.close();
+
+        assertThrows(IllegalArgumentException.class, () -> boxBuilder.createZip(emptyPath));
     }
 
     @Test
