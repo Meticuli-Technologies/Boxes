@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class BoxTest {
     @Test
-    void of(){
-        Box box = Box.of(String.class);
+    void from(){
+        Box box = new Box(String.class);
         Map<String, Class<?>> classMap = box.classMap;
         assertEquals(1, classMap.size());
 
@@ -28,14 +28,14 @@ class BoxTest {
 
     @Test
     void classByName() {
-        Box box = Box.of(String.class);
+        Box box = new Box(String.class);
         assertEquals(1, box.classMap.size());
         assertTrue(box.classMap.containsKey("java.lang.String"));
     }
 
     @Test
     void allClasses(){
-        Box box = Box.of(String.class);
+        Box box = new Box(String.class);
         Set<Class<?>> classes = box.allClasses();
         assertEquals(1, classes.size());
         assertTrue(classes.contains(String.class));

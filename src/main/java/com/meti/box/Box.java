@@ -20,10 +20,6 @@ public class Box {
         }
     }
 
-    public static Box of(Class<?>... classes) {
-        return new Box(classes);
-    }
-
     public Set<Class<?>> allClasses() {
         return new HashSet<>(classMap.values());
     }
