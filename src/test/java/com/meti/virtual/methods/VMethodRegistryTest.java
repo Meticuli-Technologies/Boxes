@@ -29,7 +29,7 @@ class VMethodRegistryTest {
         methodRegistry.register(method1);
 
         String expected =
-                "String[] main0(){}\nString[] main1(){}";
+                "String[] main0(){return null;}\nString[] main1(){return null;}";
         assertEquals(expected, methodRegistry.print());
     }
 }

@@ -24,7 +24,7 @@ class VMethodTest {
         VMethod method = new VMethod("main", registry.elementOf(of(Void.class)), new VParameter(registry.elementOf(of(String[].class)), "args"));
 
         String expected =
-                "void main(String[] args){}";
+                "void main(String[] args){return null;}";
         assertEquals(expected, method.print());
     }
 
@@ -37,7 +37,7 @@ class VMethodTest {
         VMethod method = new VMethod("main", registry.elementOf(of(String.class)), new VParameter(registry.elementOf(of(String[].class)), "args"));
 
         String expected =
-                "String main(String[] args){}";
+                "String main(String[] args){return null;}";
         assertEquals(expected, method.print());
     }
 }
