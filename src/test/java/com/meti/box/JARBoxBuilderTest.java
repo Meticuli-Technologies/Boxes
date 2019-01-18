@@ -8,8 +8,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
@@ -53,6 +52,15 @@ class JARBoxBuilderTest {
         Class<?> clazz = classMap.get("Main");
         assertNotNull(clazz);
         assertEquals("Main", clazz.getName());
+    }
+
+    @Test
+    void buildWithInvalidName() throws Exception {
+        JARBoxBuilder boxBuilder = new TestJARBoxBuilder();
+        Box box = boxBuilder.build(jarPath);
+        Map<String, Class<?>> classMap = box.classMap;
+
+        assertEquals(0, classMap.size());
     }
 
     @Test
@@ -119,5 +127,12 @@ class JARBoxBuilderTest {
         Set<String> classNames = boxBuilder.getClassNames(boxBuilder.createZip(jarPath));
         assertEquals(1, classNames.size());
         assertTrue(classNames.contains("Main"));
+    }
+
+    private class TestJARBoxBuilder extends JARBoxBuilder {
+        @Override
+        Set<String> getClassNames(ZipFile jarZip) {
+            return new HashSet<>(Collections.singletonList("foo"));
+        }
     }
 }
