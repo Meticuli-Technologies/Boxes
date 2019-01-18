@@ -2,6 +2,9 @@ package com.meti.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * @author SirMathhman

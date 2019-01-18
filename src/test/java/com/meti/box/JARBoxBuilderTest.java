@@ -8,10 +8,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
@@ -47,10 +44,17 @@ class JARBoxBuilderTest {
     void build() throws Exception {
         JARBoxBuilder boxBuilder = new JARBoxBuilder();
         Box box = boxBuilder.build(jarPath);
+
+        checkBox(box);
+
+        Set<Box> subBoxes = box.subBoxes;
+        assertEquals(1, subBoxes.size());
+        checkBox(new ArrayList<>(subBoxes).get(0));
+    }
+
+    private void checkBox(Box box) {
         Map<String, Class<?>> classMap = box.classMap;
-
         assertEquals(1, classMap.size());
-
         Class<?> clazz = classMap.get("Main");
         assertNotNull(clazz);
         assertEquals("Main", clazz.getName());

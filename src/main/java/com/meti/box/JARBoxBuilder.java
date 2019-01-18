@@ -1,11 +1,15 @@
 package com.meti.box;
 
+import com.meti.util.Checker;
+import com.meti.util.Clause;
+
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -13,6 +17,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+import static com.meti.util.Clause.*;
 
 /**
  * @author SirMathhman
@@ -29,15 +35,22 @@ public class JARBoxBuilder implements BoxBuilder<Path> {
 
         URLClassLoader classLoader = new URLClassLoader(new URL[]{source.toUri().toURL()});
         Class[] classes = classNames.stream()
-                .map((Function<String, Optional<Class<?>>>) s -> {
-                    try {
-                        return Optional.of(classLoader.loadClass(s));
-                    } catch (ClassNotFoundException e) {
-                        return Optional.empty();
-                    }
-                })
+                .map(wrap((Clause<String, Class<?>>) classLoader::loadClass))
                 .flatMap(Optional::stream).distinct().toArray(Class[]::new);
-        return new Box(classes);
+
+        String fileName = source.getFileName().toString();
+        Path folder = source.getParent().resolve(fileName.substring(0, fileName.indexOf('.')));
+
+        Set<Box> subBoxes = new HashSet<>();
+        if(Files.exists(folder)){
+            Files.list(folder)
+                    .filter(Checker.wrap(this::checkJar))
+                    .map(Clause.wrap(this::build))
+                    .flatMap(Optional::stream)
+                    .forEach(subBoxes::add);
+        }
+
+        return new Box(subBoxes, classes);
     }
 
     void checkJar(Path source) {

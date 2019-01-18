@@ -12,9 +12,15 @@ import java.util.stream.Collectors;
  * @since 1/17/2019
  */
 public class Box {
+    final Set<Box> subBoxes;
     final Map<String, Class<?>> classMap = new HashMap<>();
 
     public Box(Class<?>... classes) {
+        this(new HashSet<>(), classes);
+    }
+
+    public Box(Set<Box> subBoxes, Class... classes) {
+        this.subBoxes = subBoxes;
         for (Class<?> aClass : classes) {
             classMap.put(aClass.getName(), aClass);
         }
