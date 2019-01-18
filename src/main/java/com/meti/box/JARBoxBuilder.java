@@ -68,6 +68,7 @@ public class JARBoxBuilder implements BoxBuilder<Path> {
     ZipFile createZip(Path source) throws IOException {
         ZipFile jarZip = new ZipFile(source.toFile());
         if (jarZip.size() == 0) {
+            jarZip.close();
             throw new IllegalArgumentException("Found an empty jar at " + source.toString() + "!");
         }
         return jarZip;

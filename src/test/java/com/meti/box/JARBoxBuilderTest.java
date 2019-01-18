@@ -8,7 +8,10 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
@@ -21,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class JARBoxBuilderTest {
     private static Path jarPath;
-    private static Path emptyPath = Paths.get(".\\Empty.jar");
 
     @BeforeAll
     static void checkStatus(){
@@ -107,17 +109,21 @@ class JARBoxBuilderTest {
 
         ZipFile zip = boxBuilder.createZip(jarPath);
         assertEquals(jarPath.toAbsolutePath().toString(), zip.getName());
+        zip.close();
     }
 
     @Test
     void createZipEmpty() throws IOException {
         JARBoxBuilder boxBuilder = new JARBoxBuilder();
 
+        Path emptyPath = Paths.get(".\\Empty.jar");
         ZipOutputStream outputStream = new ZipOutputStream(Files.newOutputStream(emptyPath));
         outputStream.flush();
         outputStream.close();
 
         assertThrows(IllegalArgumentException.class, () -> boxBuilder.createZip(emptyPath));
+
+        Files.delete(emptyPath);
     }
 
     @Test
