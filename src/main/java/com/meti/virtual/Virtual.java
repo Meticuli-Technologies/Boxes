@@ -6,5 +6,5 @@ package com.meti.virtual;
  * @since 1/14/2019
  */
 public interface Virtual {
-    String toContent();
+    String print();
 }
